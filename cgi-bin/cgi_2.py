@@ -1,18 +1,21 @@
+""" cgi_2.py script """
+
 #!/usr/bin/env python
-import cgi
-import cgitb
-cgitb.enable()
 import os
 import datetime
 
+import cgi
+import cgitb
+cgitb.enable()
 
-default = "No Value Present"
+
+DEFAULT = "No Value Present"
 
 
 print("Content-Type: text/html")
 print("")
 
-body = """<html>
+BODY = """<html>
 <head>
 <title>Lab 1 - CGI experiments</title>
 </head>
@@ -22,11 +25,16 @@ body = """<html>
 <p>This page was requested by IP Address {client_ip}</p>
 </body>
 </html>""".format(
-    software=os.environ.get('SERVER_SOFTWARE', default),
-    script='aaaa',
-    month='bbbb',
-    date='cccc',
-    year='dddd',
-    client_ip='eeee'
+    software=os.environ.get('SERVER_SOFTWARE', DEFAULT),
+    # script='aaaa',
+    # month='bbbb',
+    # date='cccc',
+    # year='dddd',
+    # client_ip='eeee'
+    script=os.environ.get('SCRIPT_NAME', DEFAULT),
+    month=datetime.datetime.now().strftime('%B'),
+    date=datetime.datetime.now().day,
+    year=datetime.datetime.now().year,
+    client_ip=os.environ.get('REMOTE_ADDR', DEFAULT),
 )
-print(body)
+print(BODY)
