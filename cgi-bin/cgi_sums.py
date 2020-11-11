@@ -6,4 +6,8 @@ cgitb.enable()
 
 print("Content-type: text/plain")
 print()
-print("Your job is to make this work")
+
+form = cgi.FieldStorage()
+inputs = form.getlist('operand')
+
+print("The sum is : {}".format(sum(int(i) for i in inputs)))
